@@ -1,7 +1,15 @@
-from flask_sqlalchemy import SQLAlchemy
-from .base import Base
+#!/usr/bin/python3
+""" holds class Reservation"""
 
-db = SQLAlchemy()
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
+
+from flask_sqlalchemy import SQLAlchemy
+
 
 class Reservation(db.Model):
     __tablename__ = 'reservation'

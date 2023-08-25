@@ -1,7 +1,15 @@
+#!/usr/bin/python
+""" holds class Customer"""
+
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
+
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from .base import Base
-from app import db
 from flask_login import UserMixin
 
 class Customer(db.Model, UserMixin):

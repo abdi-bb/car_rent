@@ -1,6 +1,15 @@
+#!/usr/bin/python
+""" holds class Car"""
+
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
+
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
 
 class Car(db.Model):
     __tablename__ = 'car'

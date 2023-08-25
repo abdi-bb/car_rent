@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import os
 from flask import Flask, render_template, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,12 +17,9 @@ app.register_blueprint(app_views)
 CORS(app, resources={'/*': {'origins': app_host}})
 
 # Configure your SQLAlchemy and other app settings
-app.config['SECRET_KEY'] = 'customer_pwd'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username@localhost/car_rent'
+#app.config['SECRET_KEY'] = 'customer_pwd'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username@localhost/car_rent'
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-login_manager = LoginManager(app)
 
 #from views import admin_bp, cars_bp, customers_bp, reservations_bp
 
