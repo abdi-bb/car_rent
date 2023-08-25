@@ -1,8 +1,14 @@
-from flask import Blueprint, render_template
+#!/usr/bin/python3
+'''
+Module: 'cars'
+'''
 
-cars_bp = Blueprint('cars', __name__, url_prefix='/cars')
+from flask import request, abort, render_template
+from api.v1.views import app_views
+from models.cars import Car
 
-@cars_bp.route('/')
+
+@app_views.route('/')
 def car_list():
     # Fetch cars data from models and pass it to the template
     cars = []  # Replace with actual cars data

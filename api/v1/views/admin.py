@@ -1,18 +1,23 @@
+#!/usr/bin/python3
+'''
+Module: 'admin'
+'''
+
+from api.v1.views import app_views
+from models.admin import Admin
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from werkzeug.security import check_password_hash
 
-admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
-
-@admin_bp.route('/admin')
+@app_views.route('/admin', methods=['GET'], strict_slashes=False)
 @login_required
 def admin_home():
     return render_template('admin_home.html')
 
-@admin_bp.route('/login', methods=['GET', 'POST'])
+
+@app_views.route('/admin/login', methods=['GET', 'POST'], strict_slashes=False)
 def admin_login():
-    from models.admin import Admin
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -26,15 +31,16 @@ def admin_login():
     
     return render_template('admin/admin_login.html')
 
-@admin_bp.route('/logout')
+
+@app_views.route('/admin/logout')
 @login_required
 def admin_logout():
     logout_user()
     return redirect(url_for('admin.admin_login'))
 
+
 from app import login_manager
 @login_manager.user_loader
 def load_user(user_id):
-    from models.admin import Admin
     return Admin.query.get(int(user_id))
 # More routes and view functions specific to admin panel

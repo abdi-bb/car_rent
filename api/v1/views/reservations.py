@@ -1,8 +1,14 @@
-from flask import Blueprint, render_template
+#!/usr/bin/python3
+'''
+Module: 'reservations'
+'''
 
-reservations_bp = Blueprint('reservations', __name__, url_prefix='/reservations')
+from flask import request, abort, render_template
+from api.v1.views import app_views
+from models.reservations import Reservations
 
-@reservations_bp.route('/')
+
+@app_views.route('/reservations')
 def reservation_list():
     # Fetch reservations data from models and pass it to the template
     reservations = []  # Replace with actual reservations data

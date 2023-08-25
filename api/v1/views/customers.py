@@ -1,20 +1,24 @@
+#!/usr/bin/python3
+'''
+Module: 'customers'
+'''
+
+from api.v1.views import app_views
+from models.customers import Customer
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from sqlalchemy.orm import sessionmaker
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-customers_bp = Blueprint('customers', __name__, url_prefix='/customers')
 
-
-@customers_bp.route('/')
+@app_views.route('/customers')
 def customer_list():
     # Fetch customers data from models and pass it to the template
     customers = []  # Replace with actual customers data
     return render_template('customers/customer_list.html', customers=customers)
 
-@customers_bp.route('/login', methods=['GET', 'POST'])
+@app_views.route('/customers/login', methods=['GET', 'POST'])
 def customer_login():
-    from models.customers import Customer
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -28,7 +32,7 @@ def customer_login():
     
     return render_template('customers/customer_login.html')
 
-@customers_bp.route('/logout')
+@app_views.route('/customers/logout')
 @login_required
 def customer_logout():
     logout_user()
@@ -37,7 +41,6 @@ def customer_logout():
 from app import login_manager
 @login_manager.user_loader
 def load_user(user_id):
-    from models.customers import Customer
     return Customer.query.get(int(user_id))
 
 # More routes and view functions specific to customers
