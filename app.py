@@ -1,36 +1,19 @@
-from flask import Flask, render_template, session
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_login import LoginManager
-from views.admin import admin_bp
-from views.cars import cars_bp
-from views import customers_bp
-from views.reservations import reservations_bp
 
 app = Flask(__name__)
-
-# Configure your SQLAlchemy and other app settings
-app.config['SECRET_KEY'] = 'customer_pwd'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username@localhost/car_rent'
-
+app.config.from_object('config')
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-login_manager = LoginManager(app)
 
-#from views import admin_bp, cars_bp, customers_bp, reservations_bp
+from controllers.admin_controller import admin_bp
+from controllers.car_controller import car_bp
+from controllers.customer_controller import customer_bp
+from controllers.reservation_controller import reservation_bp
 
-# Register blueprints
-app.register_blueprint(admin_bp)
-app.register_blueprint(cars_bp)
-app.register_blueprint(customers_bp)
-app.register_blueprint(reservations_bp)
-
-'''@app.route('/')
-
-def home():
-    return render_template('index.html')
-'''
-# More routes and view functions for other parts of your app
+app.register_blueprint(admin_bp, url_prefix='/admin')
+app.register_blueprint(car_bp, url_prefix='/car')
+app.register_blueprint(customer_bp, url_prefix='/customer')
+app.register_blueprint(reservation_bp, url_prefix='/reservation')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
+    app.run()
