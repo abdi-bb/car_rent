@@ -10,7 +10,7 @@ DEBUG = True
 
 # Connect to the database
 # QLALCHEMY_DATABASE_URI = 'mysql+pymysql://username:password@hostname/database'
-QLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root_pwd@127.0.0.1/database'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://car_rent_user:car_rent_pwd@localhost/car_rent_db'
 
 # Turn off the Flask-SQLAlchemy event system and warning
 SQLALCHEMY_TRACK_MODIFICATIONS = False

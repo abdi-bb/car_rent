@@ -1,10 +1,39 @@
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+from base_model import Base
+from flask_login import UserMixin
 from app import db
 
-class Customer(db.Model):
+class Customer(db.Model, UserMixin):
+    __tablename__ = 'customer'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), index=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    phone_number = db.Column(db.String(20), index=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    phone_number = db.Column(db.String(15), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(200), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.admin_id'))
+
+    # Define a backref to access reservations made by this customer
+    reservations = relationship('Reservation', backref='customer', lazy='dynamic')
+
+    def __init__(self, username, name, last_name, phone_number, email, password, address):
+        self.username = username
+        self.name = name
+        self.last_name = last_name
+        self.phone_number = phone_number
+        self.email = email
+        self.password = password
+        self.address = address
 
     def __repr__(self):
         return '<Customer {}>'.format(self.name)
+
+    def is_active(self):
+        return True
+    def get_id(self):
+        return self.id
+    def check_password(self, password):
+        return self.password == password
