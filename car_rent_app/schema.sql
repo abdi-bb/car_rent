@@ -8,7 +8,7 @@ CREATE TABLE admin (
   name TEXT NOT NULL,
   username TEXT UNIQUE NOT NULL,
   email TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
+  password TEXT NOT NULL
 );
 
 CREATE TABLE car (
@@ -17,7 +17,7 @@ CREATE TABLE car (
   model TEXT NOT NULL,
   status TEXT NOT NULL,
   seat INTEGER NOT NULL,
-  door INTEGER NOT  NULL,
+  door INTEGER NOT NULL,
   gearbox TEXT NOT NULL,
   image TEXT,
   admin_id INTEGER NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE customer (
   name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   phone_number TEXT NOT NULL,
-  email TEXT NOT UNIQUE NOT NULL,
+  email TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   address TEXT NOT NULL,
   admin_id INTEGER NOT NULL,
@@ -39,9 +39,9 @@ CREATE TABLE customer (
 
 CREATE TABLE reservation (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
   pickup_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   dropoff_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  customer_name TEXT NOT NULL,
   email TEXT NOT NULL,
   password TEXT NOT NULL,
   customer_id INTEGER NOT NULL,
@@ -49,3 +49,4 @@ CREATE TABLE reservation (
   FOREIGN KEY (customer_id) REFERENCES customer (id),
   FOREIGN KEY (admin_id) REFERENCES admin (id)
 );
+
