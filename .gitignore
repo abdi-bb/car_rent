@@ -1,3 +1,13 @@
 car/
 __pycache__/
 *.~
+*.pyc
+*venv/
+.venv/
+instance/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
