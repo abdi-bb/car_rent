@@ -26,8 +26,12 @@ CREATE TABLE car (
   door INTEGER NOT NULL,
   gearbox TEXT NOT NULL,
   image TEXT,
+  pickup_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  dropoff_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   admin_id INTEGER NOT NULL,
+  customer_id INTEGER NOT NULL,
   FOREIGN KEY (admin_id) REFERENCES admin (id)
+  FOREIGN KEY (customer_id) REFERENCES customer (id),
 );
 
 CREATE TABLE customer (
@@ -43,6 +47,7 @@ CREATE TABLE customer (
   FOREIGN KEY (admin_id) REFERENCES admin (id)
 );
 
+'''
 CREATE TABLE reservation (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   pickup_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -55,4 +60,4 @@ CREATE TABLE reservation (
   FOREIGN KEY (customer_id) REFERENCES customer (id),
   FOREIGN KEY (admin_id) REFERENCES admin (id)
 );
-
+'''

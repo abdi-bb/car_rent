@@ -37,14 +37,18 @@ def create_app(test_config=None):
 
     from . import admin
     app.register_blueprint(admin.bp)
+    app.add_url_rule('/', endpoint='index')
 
     from . import car
     app.register_blueprint(car.bp)
+    app.add_url_rule('/', endpoint='index')
 
     from . import customer
     app.register_blueprint(customer.bp)
+    app.add_url_rule('/', endpoint='index')
 
     from . import reservation
     app.register_blueprint(reservation.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
