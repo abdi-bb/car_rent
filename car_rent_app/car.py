@@ -48,9 +48,9 @@ def create():
 
 def get_car(id, check_author=True):
     car = get_db().execute(
-        'SELECT p.id, title, body, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = ?',
+        'SELECT ca.id, name, model, seat, image, admin_id'
+        ' FROM car ca JOIN admin ad ON ca.admin_id = ad.id'
+        ' WHERE ca.id = ?',
         (id,)
     ).fetchone()
 
@@ -61,3 +61,34 @@ def get_car(id, check_author=True):
         abort(403)
 
     return car
+
+
+@bp.route('/<int:id>/update', methods=('GET', 'POST'))
+@login_required
+def update(id):
+    car = get_car(id)
+
+    if request.method == 'POST':
+        name = request.form['name']
+        model = request.form['model']
+        error = None
+
+        if not name:
+            error = 'Name is required.'
+        if not model:
+            error = 'Model is required.'
+
+        if error is not None:
+            flash(error)
+
+        else:
+            db = get_db()
+            db.execute(
+                'UPDATE car SET name = ?, model = ?'
+                ' WHERE id = ?',
+                (name, model, id)
+            )
+            db.commit()
+            return redirect(url_for('car.index'))
+
+    return render_template('car/update.html', car=car)
