@@ -32,4 +32,19 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    from . import admin
+    app.register_blueprint(admin.bp)
+
+    from . import car
+    app.register_blueprint(car.bp)
+
+    from . import customer
+    app.register_blueprint(customer.bp)
+
+    from . import reservation
+    app.register_blueprint(reservation.bp)
+
     return app
