@@ -1,27 +1,32 @@
 <!doctype html>
+<!- Temporary heade -->
+<head>
+<title>Welcome to [Company Name]!</title>
+<style>
+h1 {
+font-size: 3em;
+}
+p {
+font-size: 1.5em;
+}
+</style>
+</head>
+
+
 <title>{% block title %}{% endblock %} - WheelsOnRent</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
   <h1>WheelsOnRent</h1>
   <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
+    {% if g.customer %}
+      <li><span>{{ g.customer['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('customer.register') }}">Register</a>
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
   </ul>
 </nav>
-
-<!- Adding Sample Body -->
-<div class="Body">
-  <style>
-    .Body {
-      background: blue url("images/land.png");
-    }
-  </style>
-</div>
 
 <section class="content">
   <header>
@@ -32,6 +37,19 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+
+<!- Temporary Body -->
+<body>
+<h1>Welcome to WheelsOnRent!</h1>
+<p>We're so glad you're here. We're here to help you with car rent and related services.</p>
+<p>What can we help you with today?</p>
+<ul>
+<li>Take a look around our website to learn more about what we do.</li>
+<li>Contact us to speak with one of our experts.</li>
+</ul>
+<p>Thank you for choosing WheelsOnRent. We're committed to your satidfaction!</p>
+</body>
+
 
 <!- footer custom -->
 <footer>

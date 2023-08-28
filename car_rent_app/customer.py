@@ -18,6 +18,37 @@ def index():
     ).fetchall()
     return render_template('customer/index.html', customers=customers)
 
+# This is customer registration controller
+@bp.route('/register', methods=('GET', 'POST'))
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        name = request.form['name']
+        last_name = request.form['last_name']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        error = None
+
+        if not username:
+            error = 'Username is required.'
+        if not name:
+            error = 'Name is required'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO customer (username, name, last_name, phone_number, email, password, address, admin_id)'
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (username, name, last_name, phone_number, email, password, address, g.admin['id'])
+            )
+            db.commit()
+            return redirect(url_for('customer.index'))
+
+    return render_template('customer/register.html')
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
