@@ -133,6 +133,8 @@ input[type=submit] {
   min-width: 10em;
 }
 
+
+
 /* footer custom style */
 footer {
   border-top: 1px solid #ddd;
@@ -153,4 +155,7 @@ footer p {
 	position: fixed;
 	left: 10px;
 	bottom: 10px;
+}
+
+div .Body {
 }
