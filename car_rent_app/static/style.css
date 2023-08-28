@@ -132,3 +132,25 @@ input[type=submit] {
   align-self: start;
   min-width: 10em;
 }
+
+/* footer custom style */
+footer {
+  border-top: 1px solid #ddd;
+  background: white;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+
+  background: lightgray;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+footer p {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+}
