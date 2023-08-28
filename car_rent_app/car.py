@@ -10,6 +10,7 @@ bp = Blueprint('car', __name__)
 
 @bp.route('/')
 def index():
+    return 'This is car index page'
     db = get_db()
     cars = db.execute(
         'SELECT car.name, car.model, car.seat, car.image'
@@ -46,7 +47,7 @@ def create():
     return render_template('car/create.html')
 
 
-def get_by_id(id, check_author=True):
+def get_car(id, check_author=True):
     car = get_db().execute(
         'SELECT ca.id, name, model, seat, image, admin_id'
         ' FROM car ca JOIN admin ad ON ca.admin_id = ad.id'
@@ -66,7 +67,7 @@ def get_by_id(id, check_author=True):
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    car = get_by(id)
+    car = get_car(id)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -97,7 +98,7 @@ def update(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    get_by_id(id)
+    get_car(id)
     db = get_db()
     db.execute('DELETE FROM car WHERE id = ?', (id,))
     db.commit()
