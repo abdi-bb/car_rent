@@ -87,8 +87,9 @@ def register():
                     (username, name, last_name, address, phone_number, email, generate_password_hash(password)),
                 )
                 db.commit()
-            except db.IntegrityError:
-                error = f"User {username} is already registered."
+            except db.IntegrityError as er:
+                print(er)
+#                error = f"User {username} is already registered."
             else:
                 return redirect(url_for("auth.login"))
 
@@ -105,7 +106,7 @@ def login():
         db = get_db()
         error = None
         customer = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+                'SELECT * FROM customer WHERE username = ?', (username,)
         ).fetchone()
 
         if customer is None:
