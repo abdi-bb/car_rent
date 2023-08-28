@@ -20,7 +20,7 @@
     <label for="email">Email</label>
     <input name="email" id="#" value="{{ request.form['email'] }}" required>
     <label for="password">Password</label>
-    <input name="password" id="#" value="{{ request.form['password'] }}" required>
+    <input name="password" type="password" id="#" value="{{ request.form['password'] }}" required>
     <input type="submit" value="Save">
   </form>
 {% endblock %}

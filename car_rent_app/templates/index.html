@@ -1,5 +1,5 @@
 <!doctype html>
-<!- Temporary heade -->
+<!- Temporary header -->
 <head>
 <title>Welcome to [Company Name]!</title>
 <style>
@@ -23,7 +23,7 @@ font-size: 1.5em;
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
     {% else %}
       <li><a href="{{ url_for('customer.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li><a href="{{ url_for('customer.login') }}">Log In</a>
     {% endif %}
   </ul>
 </nav>
@@ -47,7 +47,7 @@ font-size: 1.5em;
 <li>Take a look around our website to learn more about what we do.</li>
 <li>Contact us to speak with one of our experts.</li>
 </ul>
-<p>Thank you for choosing WheelsOnRent. We're committed to your satidfaction!</p>
+<p>Thank you for choosing WheelsOnRent. We're committed to your satisfaction!</p>
 </body>
 
 
